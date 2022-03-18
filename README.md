@@ -1,7 +1,7 @@
 # appmax-EG2022CH
 ## Appmax challenge
 
-### Specificações:
+### Especificações:
 ```
 PHP: 7.4.27
 Laravel: 8.83.5
