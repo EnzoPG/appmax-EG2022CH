@@ -13,3 +13,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+/**
+ * Declare the main resource controller
+ */
+Route::apiResource('/products', 'ProductsController');
