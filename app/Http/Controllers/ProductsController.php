@@ -7,6 +7,7 @@ use App\Models\Products;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductsRequest;
 use App\Http\Resources\ProductsResource;
+use App\Http\Controllers\HistoryController;
 
 class ProductsController extends Controller
 {
@@ -74,7 +75,7 @@ class ProductsController extends Controller
       $response['data'] = new ProductsResource($Produto);
     } catch (\Throwable $th) {
       $response['status'] = 0;
-      $response['error'] = $th;
+      $response['error'] = $th->getMessage();
       $response['mensagem'] = 'Não foi possível executar esta ação...';
     }
 
@@ -94,13 +95,16 @@ class ProductsController extends Controller
 
     try {
       $produto = Products::find($id);
+      // Create the movimentation history
+      HistoryController::store($request->all(), $produto);
+      // Atualiza o registro
       $produto->update($request->all());
 
       $response['status'] = 1;
       $response['mensagem'] = 'Produto atualizado com sucesso';
     } catch (\Throwable $th) {
       $response['status'] = 0;
-      $response['error'] = $th;
+      $response['error'] = $th->getMessage();
       $response['mensagem'] = 'Não foi possível executar esta ação...';
     }
 
@@ -124,7 +128,7 @@ class ProductsController extends Controller
       $response['mensagem'] = 'Produto deletado com sucesso';
     } catch (\Throwable $th) {
       $response['status'] = 0;
-      $response['error'] = $th;
+      $response['error'] = $th->getMessage();
       $response['mensagem'] = 'Não foi possível executar esta ação...';
     }
     return response($response, 200);

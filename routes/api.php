@@ -18,3 +18,8 @@ use Illuminate\Support\Facades\Route;
  * Declare the main resource controller
  */
 Route::apiResource('/products', 'ProductsController');
+
+/**
+ * Declare the main endpoint to get all the history
+ */
+Route::get('/history', 'HistoryController@index');

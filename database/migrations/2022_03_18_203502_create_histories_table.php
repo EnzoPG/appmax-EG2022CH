@@ -15,7 +15,7 @@ class CreateHistoriesTable extends Migration
     {
         Schema::create('histories', function (Blueprint $table) {
             $table->id();
-            $table->json('sku');
+            $table->string('sku', 50);
             $table->json('qtd');
             $table->timestamps();
 
