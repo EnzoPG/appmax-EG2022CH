@@ -46,7 +46,7 @@ class HistoryController extends Controller
     try {
       $History = new History;
       // Validando se o SKU do produto sofreu alteração
-      if($productDB->sku != $productReq['sku']) {
+      if($productDB->sku != $productReq['sku'] && $productReq['sku'] != '') {
         $History->sku = $productReq['sku'];
       } else {
         $History->sku = $productDB->sku;
