@@ -63,16 +63,23 @@ class ProductsController extends Controller
   public function store(ProductsRequest $request)
   {
     $response = [];
+    // Validando a requisição recebida (campos obrigatórios)
+    $validated = $request->validated();
 
     try {
-      $Produto = new Products;
-      $Produto->name = $request->name;
-      $Produto->sku = $request->sku;
-      $Produto->qtd = $request->qtd;
-      $Produto->save();
+      if($validated) {
+        $Produto = new Products;
+        $Produto->name = $request->name;
+        $Produto->sku = $request->sku;
+        $Produto->qtd = $request->qtd;
+        $Produto->save();
 
-      $response['status'] = 1;
-      $response['data'] = new ProductsResource($Produto);
+        $response['status'] = 1;
+        $response['data'] = new ProductsResource($Produto);
+      } else {
+        $response['status'] = 2;
+        $response['mensagem'] = 'Nem todos os parâmetros foram preenchidos';
+      }
     } catch (\Throwable $th) {
       $response['status'] = 0;
       $response['error'] = $th->getMessage();
