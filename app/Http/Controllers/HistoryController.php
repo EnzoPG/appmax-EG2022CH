@@ -45,7 +45,12 @@ class HistoryController extends Controller
 
     try {
       $History = new History;
-      $History->sku = $productDB->sku;
+      // Validando se o SKU do produto sofreu alteração
+      if($productDB->sku != $productReq['sku']) {
+        $History->sku = $productReq['sku'];
+      } else {
+        $History->sku = $productDB->sku;
+      }
       // Condição para verificar se a quantidade foi adicionada ou removida
       if($productDB->qtd < $productReq['qtd']) {
         $action = 'acrescentada';
