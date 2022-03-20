@@ -15,9 +15,50 @@ Versão do cliente de banco de dados: libmysql - mysqlnd 7.4.19
 
 ### Comandos iniciais:
 ```
+# Executa a instalação das dependências
+composer install
+
 # Executa a criação das migrations
 php artisan migrate
 
-# Rollback nas migrations
+# Rollback - migrations
 php artisan migrate:rollback
 ```
+### Rotas
+<table>
+  <tr>
+    <th>Tipo</th>
+    <th>Rota</th>
+    <th>Método</th>
+  </tr>
+  <tr>
+    <td>GET | HEAD</td>
+    <td>api/history</td>
+    <td>history.index</td>
+  </tr>
+  <tr>
+    <td>GET | HEAD</td>
+    <td>api/products</td>
+    <td>products.index</td>
+  </tr>
+  <tr>
+    <td>POST</td>
+    <td>api/products</td>
+    <td>products.store</td>
+  </tr>
+  <tr>
+    <td>GET | HEAD</td>
+    <td>api/products/{product}</td>
+    <td>products.show</td>
+  </tr>
+  <tr>
+    <td>PUT | PATCH</td>
+    <td>api/products/{product}</td>
+    <td>products.update</td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td>api/products/{product}</td>
+    <td>products.destroy</td>
+  </tr>
+</table>
